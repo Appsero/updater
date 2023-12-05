@@ -1,0 +1,11 @@
+{
+    "name": "appsero/updater",
+    "description": "Appsero client updater module",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Appsero\\": "src/"
+        }
+    },
+    "require": {}
+}
