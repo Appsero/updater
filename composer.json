@@ -2,6 +2,13 @@
     "name": "appsero/updater",
     "description": "Appsero client updater module",
     "type": "library",
+    "license": "MIT",
+    "authors": [
+      {
+        "name": "Tareq Hasan",
+        "email": "tareq@appsero.com"
+      }
+    ],
     "autoload": {
         "psr-4": {
             "Appsero\\": "src/"
