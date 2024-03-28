@@ -51,9 +51,7 @@ class Updater {
 
 	public static function init($client)
 	{
-		if (!self::$instance) {
-			self::$instance = new self($client);
-		}
+		self::$instance = new self($client);
 
 		return self::$instance;
 	}
