@@ -52,5 +52,8 @@ if (! class_exists('Appsero\Updater')) {
 $client = new Appsero\Client( 'a4a8da5b-b419-4656-98e9-4a42e9044891', 'Akismet', __FILE__ );
 
 // Active automatic updater
+new Appsero\Updater($client);
+
+//or
 Appsero\Updater::init($client);
 ```
