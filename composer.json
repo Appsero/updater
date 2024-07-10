@@ -14,5 +14,7 @@
             "Appsero\\": "src/"
         }
     },
-    "require": {}
+    "require": {
+        "appsero/client": "^2.0"
+    }
 }
