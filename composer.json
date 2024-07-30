@@ -13,8 +13,5 @@
         "psr-4": {
             "Appsero\\": "src/"
         }
-    },
-    "require": {
-        "appsero/client": "^2.0"
     }
 }
