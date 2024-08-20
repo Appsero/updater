@@ -41,7 +41,9 @@ class Updater
     {
         $this->client = $client;
         $this->cache_key = 'appsero_' . md5(sanitize_key($this->client->slug)) . '_version_info';
-
+        
+        add_filter('upgrader_pre_download', [$this , 'validate_plugin_update_url'], 10, 2);
+        
         // Run hooks based on the client type
         if ($this->client->type === 'plugin') {
             $this->run_plugin_hooks();
@@ -415,5 +417,24 @@ class Updater
             )),
             esc_html(implode('&nbsp;', $warnings))
         );
+    }
+
+    public function validate_plugin_update_url($reply, $package) {
+        $response = wp_remote_get($package);
+    
+        if (is_wp_error($response) || wp_remote_retrieve_response_code($response) != 200) {
+    
+            $error_message = is_wp_error($response) 
+                ? $response->get_error_message() 
+                : wp_remote_retrieve_body($response);
+    
+            if (empty($error_message)) {
+                $error_message = wp_remote_retrieve_response_message($response);
+            }
+    
+            return new \WP_Error('invalid_update_url', $error_message);
+        }
+    
+        return $reply;
     }
 }
