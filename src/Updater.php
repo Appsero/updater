@@ -116,7 +116,11 @@ class Updater
 
             // If new version available, set to response
             if (version_compare($this->client->project_version, $version_info->new_version, '<')) {
-                $warnings = $this->check_required_plugins($version_info->required_plugins);
+                $required_plugins = isset($version_info->required_plugins) && (is_array($version_info->required_plugins) || is_object($version_info->required_plugins))
+                ? $version_info->required_plugins
+                : [];
+
+                $warnings = $this->check_required_plugins($required_plugins);
 
                 if (!empty($warnings)) {
                     $this->show_warning_notice($warnings);
