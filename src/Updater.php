@@ -428,8 +428,8 @@ class Updater
         if ( ! preg_match( '!^(http|https|ftp)://!i', $package ) && file_exists( $package ) ) {
             return $reply; // Must be a local file.
         }
-        
-        $response = wp_remote_get($package, [ 'method' => 'HEAD' ]);
+
+	    $response = wp_remote_get($package, ['method' => 'HEAD', 'redirection' => 5, 'timeout' => 20]);
     
         if (is_wp_error($response) || wp_remote_retrieve_response_code($response) != 200) {
     
