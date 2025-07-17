@@ -66,6 +66,26 @@ class Updater
 
         return self::$instance;
     }
+    
+    /**
+     * Set up WordPress filter hooks to get plugin updates
+     *
+     * @return void
+     */
+    public function run_plugin_hooks()
+    {
+        add_action('admin_init', [$this, 'admin_init']);
+    }
+
+    /**
+     * Set up WordPress filter hooks to get theme updates
+     *
+     * @return void
+     */
+    public function run_theme_hooks()
+    {
+        add_filter('pre_set_site_transient_update_themes', [$this, 'check_theme_update']);
+    }
 
     /**
      * Initialize the admin hooks
