@@ -263,7 +263,20 @@ class Updater
             return $data;
         }
 
-        return $this->get_version_info();
+        $version_info = $this->get_version_info();
+
+        if (false === $version_info || !is_object($version_info)) {
+            return $data;
+        }
+
+        // WP core (install_plugin_install_status) reads $api->version; AppSero returns
+        // new_version, so mirror it to avoid "Undefined property: version" and the
+        // version_compare(null) deprecation on PHP 8.
+        if (!isset($version_info->version) && isset($version_info->new_version)) {
+            $version_info->version = $version_info->new_version;
+        }
+
+        return $version_info;
     }
 
     /**
